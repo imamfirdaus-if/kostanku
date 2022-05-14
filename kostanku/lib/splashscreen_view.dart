@@ -4,9 +4,6 @@ import 'package:kostanku/HomePage.dart';
 
 class SplashScreen extends StatefulWidget {
   final Color backgroundColor = Colors.white;
-  final TextStyle styleTextUnderTheLoader = TextStyle(
-      fontSize: 18.0, fontWeight: FontWeight.bold, color: Colors.black);
-
   @override
   _SplashScreenState createState() => _SplashScreenState();
 }

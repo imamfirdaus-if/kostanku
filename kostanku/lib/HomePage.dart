@@ -1,6 +1,5 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
+import 'package:kostanku/modules/kost/views/list_kost_view.dart';
 
 class HomePage extends StatelessWidget {
   @override
@@ -10,7 +9,23 @@ class HomePage extends StatelessWidget {
         title: Text('Home Page'),
       ),
       body: Center(
-        child: Text('Home'),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text('Home'),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const ListKostView(),
+                  ),
+                );
+              },
+              child: Text('Daftar Kost'),
+            ),
+          ],
+        ),
       ),
     );
   }

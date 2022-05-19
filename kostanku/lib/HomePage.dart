@@ -34,7 +34,7 @@ class HomePage extends StatelessWidget {
                   ),
                 );
               },
-              child: Text('Data Kamar'),
+              child: Text('Daftar Kamar'),
             ),
           ],
         ),

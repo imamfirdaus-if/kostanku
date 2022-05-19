@@ -34,7 +34,7 @@ class _ListDataKamarState extends State<ListDataKamar> {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Text(
-          'Data Kamar',
+          'Daftar Kamar',
           textAlign: TextAlign.center,
           style: TextStyle(
             fontSize: 24,
@@ -49,7 +49,7 @@ class _ListDataKamarState extends State<ListDataKamar> {
             itemBuilder: (context, index) {
               return DataKamarCard(
                 kostName: 'Kost Melati',
-                categoryName: 'VVIP',
+                categoryName: 'Ruang VVIP',
               );
             },
             separatorBuilder: (context, index) {

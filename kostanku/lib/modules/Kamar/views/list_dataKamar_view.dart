@@ -44,7 +44,7 @@ class _ListDataKamarState extends State<ListDataKamar> {
         SizedBox(height: 20),
         Flexible(
           child: ListView.separated(
-            padding: EdgeInsets.fromLTRB(28, 0, 28, 20),
+            padding: EdgeInsets.fromLTRB(20, 0, 28, 20),
             physics: BouncingScrollPhysics(),
             itemBuilder: (context, index) {
               return DataKamarCard(

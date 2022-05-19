@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kostanku/modules/Kamar/views/list_dataKamar_view.dart';
 import 'package:kostanku/modules/kost/views/list_kost_view.dart';
 
 class HomePage extends StatelessWidget {
@@ -23,6 +24,17 @@ class HomePage extends StatelessWidget {
                 );
               },
               child: Text('Daftar Kost'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const ListDataKamar(),
+                  ),
+                );
+              },
+              child: Text('Data Kamar'),
             ),
           ],
         ),

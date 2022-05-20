@@ -9,6 +9,7 @@ AppBar CustomAppbar({
   String? title,
   bool backButton = false,
   Widget? icon,
+  bool deleteButton = false,
   void Function()? onTap,
   Color? backgroundColor,
 }) {
@@ -25,6 +26,18 @@ AppBar CustomAppbar({
         }
       },
     ),
+    actions: [
+      IconButton(
+          onPressed: () {
+            if (deleteButton) {
+              Navigator.pop(context);
+            } else {
+              onTap;
+            }
+          },
+          icon: deleteButton ? Icon(IconlyBold.delete) : icon ?? Container(),
+          color: Pallete.error)
+    ],
     backgroundColor: backgroundColor ?? Pallete.background,
     elevation: 0,
   );

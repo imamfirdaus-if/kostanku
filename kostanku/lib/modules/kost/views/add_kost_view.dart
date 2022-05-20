@@ -44,10 +44,7 @@ class _AddKostViewState extends State<AddKostView> {
   }
 
   AppBar _buildAppbar() {
-    return CustomAppbar(
-      context: context,
-      backButton: true,
-    );
+    return CustomAppbar(context: context, backButton: true, deleteButton: true);
   }
 
   Widget _buildFAB() {

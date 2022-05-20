@@ -2,7 +2,6 @@
 
 import 'dart:math';
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:kostanku/components/custom_appbar.dart';
 import 'package:kostanku/constants/pallete.dart';
@@ -90,7 +89,7 @@ Widget _buildFormUpload() {
           'Foto Kamar',
           style: TextStyle(color: Pallete.disabled),
         ),
-        SizedBox(width: 130),
+        SizedBox(width: 150),
         _buildUploadButton()
       ],
     ),

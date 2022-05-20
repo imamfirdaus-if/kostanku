@@ -28,6 +28,7 @@ AppBar CustomAppbar({
     ),
     actions: [
       IconButton(
+          padding: EdgeInsets.only(right: 20),
           onPressed: () {
             if (deleteButton) {
               Navigator.pop(context);

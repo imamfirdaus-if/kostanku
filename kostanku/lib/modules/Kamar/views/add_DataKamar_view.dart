@@ -1,9 +1,9 @@
-import 'dart:math';
 import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:kostanku/components/custom_appbar.dart';
-import 'package:kostanku/constants/pallete.dart';
 import 'package:kostanku/components/custom_textfield.dart';
+import 'package:kostanku/constants/pallete.dart';
 
 class AddDataKamar extends StatefulWidget {
   const AddDataKamar({Key? key}) : super(key: key);
@@ -16,6 +16,7 @@ class _AddDataKamarState extends State<AddDataKamar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Pallete.background,
       appBar: _buildAppbar(),
       body: _buildBody(),
       floatingActionButton: _buildFAB(),

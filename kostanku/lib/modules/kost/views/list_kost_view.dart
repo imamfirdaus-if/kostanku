@@ -17,6 +17,7 @@ class _ListKostViewState extends State<ListKostView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Pallete.background,
       appBar: _buildAppbar(),
       body: _buildBody(),
       floatingActionButton: _buildFAB(),

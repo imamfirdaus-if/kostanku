@@ -16,6 +16,7 @@ class _AddKostViewState extends State<AddKostView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Pallete.background,
       appBar: _buildAppbar(),
       body: _buildBody(),
       floatingActionButton: _buildFAB(),
@@ -36,7 +37,7 @@ class _AddKostViewState extends State<AddKostView> {
               fontWeight: FontWeight.bold,
             ),
           ),
-          SizedBox(height: 70),
+          SizedBox(height: 100),
           _buildFormField(),
         ],
       ),

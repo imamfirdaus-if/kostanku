@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:kostanku/components/custom_appbar.dart';
 import 'package:kostanku/constants/pallete.dart';
-import 'package:kostanku/modules/Kamar/views/add_DataKamar_view.dart';
-import 'package:kostanku/modules/Kamar/views/list_dataKamar_view.dart';
 import 'package:kostanku/modules/Kamar/components/DataKamar_card.dart';
+import 'package:kostanku/modules/Kamar/views/add_DataKamar_view.dart';
 
 class ListDataKamar extends StatefulWidget {
   const ListDataKamar({Key? key}) : super(key: key);
@@ -16,6 +15,7 @@ class _ListDataKamarState extends State<ListDataKamar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Pallete.background,
       appBar: _buildAppbar(),
       body: _buildBody(),
       floatingActionButton: _buildFAB(),

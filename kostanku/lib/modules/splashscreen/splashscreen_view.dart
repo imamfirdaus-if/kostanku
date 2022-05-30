@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:kostanku/HomePage.dart';
+import 'package:kostanku/modules/home/views/home_view.dart';
 
 class SplashScreen extends StatefulWidget {
   final Color backgroundColor = Colors.white;
@@ -26,7 +26,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   void navigationPage() {
     Navigator.pushReplacement(context,
-        MaterialPageRoute(builder: (BuildContext context) => HomePage()));
+        MaterialPageRoute(builder: (BuildContext context) => HomeView()));
   }
 
   @override
@@ -34,7 +34,7 @@ class _SplashScreenState extends State<SplashScreen> {
     return Scaffold(
       body: Center(
         child: Image.asset(
-          'images/logo.png',
+          'assets/images/logo.png',
           height: 200,
           width: 200,
         ),

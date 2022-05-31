@@ -66,7 +66,7 @@ class categoryCard extends StatelessWidget {
         Text(
           facility,
           textAlign: TextAlign.start,
-          style: TextStyle(fontSize: 11),
+          style: TextStyle(fontSize: 12),
         ),
         SizedBox(height: 20),
         Container(

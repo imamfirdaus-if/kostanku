@@ -88,7 +88,7 @@ Widget _buildFormUpload() {
           'Foto Kamar',
           style: TextStyle(color: Pallete.disabled),
         ),
-        SizedBox(width: 150),
+        SizedBox(width: 120),
         _buildUploadButton()
       ],
     ),

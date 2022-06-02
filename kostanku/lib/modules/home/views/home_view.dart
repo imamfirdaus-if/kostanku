@@ -118,14 +118,14 @@ class _HomeViewState extends State<HomeView> {
               itemBuilder: (context, index) {
                 return ReportItem(
                   iconUrl: iconUrls[index],
-                  title: 'Jumlah Kost',
+                  title: gridItemTitles[index],
                   number: '5',
                 );
               },
               separatorBuilder: (context, index) {
                 return SizedBox(width: 16);
               },
-              itemCount: 5,
+              itemCount: gridItemTitles.length,
             ),
           ),
         ],

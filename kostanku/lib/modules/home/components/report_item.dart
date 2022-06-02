@@ -69,7 +69,6 @@ class _ReportItemState extends State<ReportItem> {
                     color: Colors.white,
                   ),
                 ),
-                SizedBox(width: 60),
               ],
             ),
             Text(

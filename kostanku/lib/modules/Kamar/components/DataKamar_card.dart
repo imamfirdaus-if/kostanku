@@ -25,7 +25,8 @@ class DataKamarCard extends StatelessWidget {
               color: Pallete.secondary,
               borderRadius: BorderRadius.circular(8),
               image: DecorationImage(
-                  image: AssetImage('images/pict1.png'), fit: BoxFit.cover),
+                  image: AssetImage('assets/images/pict1.png'),
+                  fit: BoxFit.cover),
             ),
           ),
           SizedBox(width: 18),

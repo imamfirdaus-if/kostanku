@@ -48,14 +48,14 @@ class _HomeViewState extends State<HomeView> {
 
   Widget _buildBody() {
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 72),
+      padding: EdgeInsets.symmetric(vertical: 60),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           _buildWelcomeSection(),
-          SizedBox(height: 40),
+          SizedBox(height: 35),
           _buildReport(),
-          SizedBox(height: 40),
+          SizedBox(height: 30),
           _buildBottomSection(),
         ],
       ),

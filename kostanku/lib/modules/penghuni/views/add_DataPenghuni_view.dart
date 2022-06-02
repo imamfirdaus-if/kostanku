@@ -16,7 +16,8 @@ class _AddDataPenghuniState extends State<AddDataPenghuni> {
     return Scaffold(
       backgroundColor: Pallete.background,
       appBar: _buildAppbar(),
-      body: Center(child: Text('coming soon')),
+      floatingActionButton: _buildFAB(),
+      // body: Center(child: Text('coming soon')),
     );
   }
 
@@ -25,6 +26,17 @@ class _AddDataPenghuniState extends State<AddDataPenghuni> {
       context: context,
       backButton: true,
       deleteButton: true,
+    );
+  }
+
+  Widget _buildFAB() {
+    return FloatingActionButton(
+      onPressed: () {},
+      backgroundColor: Pallete.secondary,
+      child: Icon(
+        Icons.check_circle_rounded,
+        size: 35,
+      ),
     );
   }
 }

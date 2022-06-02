@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:kostanku/components/custom_appbar.dart';
 import 'package:kostanku/constants/pallete.dart';
@@ -43,7 +44,7 @@ class _ListKostViewState extends State<ListKostView> {
             fontWeight: FontWeight.bold,
           ),
         ),
-        SizedBox(height: 20),
+        SizedBox(height: 40),
         Flexible(
           child: ListView.separated(
             padding: EdgeInsets.fromLTRB(28, 0, 28, 20),
@@ -70,7 +71,7 @@ class _ListKostViewState extends State<ListKostView> {
     return FloatingActionButton(
       onPressed: () => Navigator.push(
         context,
-        MaterialPageRoute(
+        CupertinoPageRoute(
           builder: (context) => AddKostView(),
         ),
       ),

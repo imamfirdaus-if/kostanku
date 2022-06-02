@@ -58,9 +58,9 @@ class categoryCard extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Fasilitas   :',
+          'Fasilitas  :',
           textAlign: TextAlign.start,
-          style: TextStyle(fontSize: 13, fontWeight: FontWeight.w700),
+          style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600),
         ),
         SizedBox(height: 6),
         Text(
@@ -70,10 +70,10 @@ class categoryCard extends StatelessWidget {
         ),
         SizedBox(height: 20),
         Container(
-          padding: EdgeInsets.only(left: 160),
+          padding: EdgeInsets.only(left: 172),
           child: Text(price,
               style: TextStyle(
-                fontWeight: FontWeight.w700,
+                fontWeight: FontWeight.w600,
                 fontSize: 13,
               )),
         )

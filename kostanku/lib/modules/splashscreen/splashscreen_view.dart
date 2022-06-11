@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:kostanku/modules/home/views/home_view.dart';
+import 'package:kostanku/modules/login/screens/sign_in_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   final Color backgroundColor = Colors.white;
@@ -26,7 +26,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   void navigationPage() {
     Navigator.pushReplacement(context,
-        MaterialPageRoute(builder: (BuildContext context) => HomeView()));
+        MaterialPageRoute(builder: (BuildContext context) => SignInScreen()));
   }
 
   @override

@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "759608486110",
+    "project_id": "mykost-161bc",
+    "storage_bucket": "mykost-161bc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:759608486110:android:75922946bb9dfbffd0fa4f",
+        "android_client_info": {
+          "package_name": "com.iftech.mykost"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "759608486110-soes6mj2vibqsr8jsqo5qftatult3r9n.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.iftech.mykost",
+            "certificate_hash": "e6965da0f07f8bd248cfad4adf9b392d9bf6f053"
+          }
+        },
+        {
+          "client_id": "759608486110-6l62df3mepqg6rf5mr3q6f854gt7sbv7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCWuhxNOYamLlyyG5kg50r6GOqTVSQMAHw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "759608486110-6l62df3mepqg6rf5mr3q6f854gt7sbv7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

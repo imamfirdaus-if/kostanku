@@ -1,7 +1,11 @@
+// ignore_for_file: prefer_const_constructors
+
+import 'dart:developer';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:kostanku/modules/home/views/home_view.dart';
-import 'package:kostanku/modules/login/screens/user_info_screen.dart';
 import 'package:kostanku/modules/login/utils/authentication.dart';
 
 class GoogleSignInButton extends StatefulWidget {
@@ -35,6 +39,7 @@ class _GoogleSignInButtonState extends State<GoogleSignInButton> {
                 });
                 User? user =
                     await Authentication.signInWithGoogle(context: context);
+                log("$_isSigningIn");
 
                 setState(() {
                   _isSigningIn = false;
@@ -51,11 +56,8 @@ class _GoogleSignInButtonState extends State<GoogleSignInButton> {
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Image(
-                      image: AssetImage("assets/google_logo.png"),
-                      height: 35.0,
-                    ),
+                  children: [
+                    SvgPicture.asset("assets/svgs/google_logo.svg"),
                     Padding(
                       padding: const EdgeInsets.only(left: 10),
                       child: Text(

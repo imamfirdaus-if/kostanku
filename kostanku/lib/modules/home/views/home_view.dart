@@ -53,9 +53,9 @@ class _HomeViewState extends State<HomeView> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           _buildWelcomeSection(),
-          SizedBox(height: 35),
+          SizedBox(height: 25),
           _buildReport(),
-          SizedBox(height: 30),
+          SizedBox(height: 20),
           _buildBottomSection(),
         ],
       ),

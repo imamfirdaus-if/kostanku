@@ -50,12 +50,12 @@ class _HomeViewState extends State<HomeView> {
 
   Widget _buildBody() {
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 60),
+      padding: EdgeInsets.symmetric(vertical: 50),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           _buildWelcomeSection(),
-          SizedBox(height: 25),
+          SizedBox(height: 20),
           _buildReport(),
           SizedBox(height: 20),
           _buildBottomSection(),
@@ -101,6 +101,7 @@ class _HomeViewState extends State<HomeView> {
 
   Widget _buildReport() {
     return Flexible(
+      flex: 1,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -176,12 +177,19 @@ class _HomeViewState extends State<HomeView> {
                       child: ElevatedButton(
                         onPressed: () async {
                           await Authentication.signOut(context: context);
-                          Navigator.pushReplacement(
+                          Navigator.pushAndRemoveUntil(
                             context,
                             CupertinoPageRoute(
                               builder: (context) => SignInScreen(),
                             ),
+                            (route) => false,
                           );
+                          // Navigator.pushReplacement(
+                          //   context,
+                          //   CupertinoPageRoute(
+                          //     builder: (context) => SignInScreen(),
+                          //   ),
+                          // );
                         },
                         child: Text('Ya'),
                       ),

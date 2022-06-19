@@ -8,6 +8,8 @@ import 'package:kostanku/modules/home/components/grid_item.dart';
 import 'package:kostanku/modules/home/components/report_item.dart';
 import 'package:kostanku/modules/kategori/views/list_kategori_view.dart';
 import 'package:kostanku/modules/kost/views/list_kost_view.dart';
+import 'package:kostanku/modules/login/screens/sign_in_screen.dart';
+import 'package:kostanku/modules/login/utils/authentication.dart';
 import 'package:kostanku/modules/penghuni/views/list_penghuni_view.dart';
 
 class HomeView extends StatefulWidget {
@@ -87,7 +89,9 @@ class _HomeViewState extends State<HomeView> {
             ],
           ),
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              showConfirmationDialog();
+            },
             icon: Icon(Icons.logout),
           ),
         ],
@@ -99,7 +103,6 @@ class _HomeViewState extends State<HomeView> {
     return Flexible(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        // mainAxisSize: MainAxisSize.min,
         children: [
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24.0),
@@ -130,6 +133,66 @@ class _HomeViewState extends State<HomeView> {
           ),
         ],
       ),
+    );
+  }
+
+  showConfirmationDialog() {
+    return showDialog(
+      context: context,
+      builder: (context) {
+        return Scaffold(
+          body: Container(
+            // width: 200,
+            // height: 200,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(8),
+              // color: Colors.white,
+            ),
+            padding: EdgeInsets.all(16),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text('Apakah anda yakin ingin keluar?'),
+                Row(
+                  children: [
+                    Expanded(
+                      child: ElevatedButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all(
+                            Colors.white,
+                          ),
+                        ),
+                        child: Text(
+                          'Tidak',
+                          style: TextStyle(color: Colors.black),
+                        ),
+                      ),
+                    ),
+                    SizedBox(width: 16),
+                    Expanded(
+                      child: ElevatedButton(
+                        onPressed: () async {
+                          await Authentication.signOut(context: context);
+                          Navigator.pushReplacement(
+                            context,
+                            CupertinoPageRoute(
+                              builder: (context) => SignInScreen(),
+                            ),
+                          );
+                        },
+                        child: Text('Ya'),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 

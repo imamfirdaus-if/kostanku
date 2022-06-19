@@ -39,7 +39,7 @@ class _GoogleSignInButtonState extends State<GoogleSignInButton> {
                 });
                 User? user =
                     await Authentication.signInWithGoogle(context: context);
-                log("$_isSigningIn");
+                log("$user");
 
                 setState(() {
                   _isSigningIn = false;
@@ -63,7 +63,7 @@ class _GoogleSignInButtonState extends State<GoogleSignInButton> {
                       child: Text(
                         'Sign in with Google',
                         style: TextStyle(
-                          fontSize: 20,
+                          // fontSize: 14,
                           color: Colors.white,
                           fontWeight: FontWeight.w600,
                         ),

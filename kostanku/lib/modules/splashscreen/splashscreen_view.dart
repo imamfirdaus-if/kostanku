@@ -1,6 +1,8 @@
 import 'dart:async';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:kostanku/modules/home/views/home_view.dart';
 import 'package:kostanku/modules/login/screens/sign_in_screen.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -25,8 +27,18 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   void navigationPage() {
-    Navigator.pushReplacement(context,
-        MaterialPageRoute(builder: (BuildContext context) => SignInScreen()));
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+        builder: (BuildContext context) {
+          if (FirebaseAuth.instance.currentUser != null) {
+            return HomeView();
+          } else {
+            return SignInScreen();
+          }
+        },
+      ),
+    );
   }
 
   @override

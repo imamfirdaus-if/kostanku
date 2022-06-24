@@ -1,5 +1,8 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
+import 'dart:developer';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:kostanku/components/custom_appbar.dart';
 import 'package:kostanku/components/custom_textfield.dart';
@@ -13,6 +16,28 @@ class AddKostView extends StatefulWidget {
 }
 
 class _AddKostViewState extends State<AddKostView> {
+  final TextEditingController _namaKostController = TextEditingController();
+  final TextEditingController _namaPemilikController = TextEditingController();
+  final TextEditingController _nomorHpController = TextEditingController();
+  final TextEditingController _alamatController = TextEditingController();
+
+  FirebaseFirestore firestore = FirebaseFirestore.instance;
+
+  CollectionReference kost = FirebaseFirestore.instance.collection("kost");
+
+  Future<void> addKost() {
+    return kost.add({
+      "nama_kost": _namaKostController.text,
+      "nama_pemilik": _namaPemilikController.text,
+      "nomor_hp": _nomorHpController.text,
+      "alamat": _alamatController.text,
+    }).then((value) {
+      log("Kost added");
+    }).catchError((error) {
+      log(error);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,7 +75,9 @@ class _AddKostViewState extends State<AddKostView> {
 
   Widget _buildFAB() {
     return FloatingActionButton(
-      onPressed: () {},
+      onPressed: () {
+        addKost();
+      },
       backgroundColor: Pallete.secondary,
       child: Icon(
         Icons.check_circle_rounded,
@@ -67,21 +94,27 @@ class _AddKostViewState extends State<AddKostView> {
         SizedBox(height: 20),
         CustomTextField(
           hintText: 'Nama Kost',
+          controller: _namaKostController,
         ),
         SizedBox(height: 20),
         CustomTextField(
           hintText: 'Nama Pemilik',
+          controller: _namaPemilikController,
         ),
         SizedBox(height: 20),
         CustomTextField(
           hintText: 'Nomor HP',
+          controller: _nomorHpController,
         ),
         SizedBox(height: 20),
         CustomTextField(
           hintText: 'Alamat',
+          controller: _alamatController,
         ),
         SizedBox(height: 20),
-        Center(child: _buildPinLocationButton()),
+        Center(
+          child: _buildPinLocationButton(),
+        ),
       ],
     );
   }

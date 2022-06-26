@@ -10,16 +10,16 @@ class KategoriDatabase {
   static String? id;
 
   static Future<void> create({
-    String? nama_kategori,
+    String? namaKategori,
     String? fasilitas,
     String? harga,
   }) async {
     DocumentReference documentReference = collectionReference.doc();
 
     Map<String, dynamic> data = {
-      "Nama kategori": nama_kategori,
-      "Fasilitas": fasilitas,
-      "Harga": harga,
+      "nama_kategori": namaKategori,
+      "fasilitas": fasilitas,
+      "harga": harga,
     };
 
     await documentReference
@@ -34,7 +34,7 @@ class KategoriDatabase {
 
   static Future<void> update({
     required String documentId,
-    String? nama_kategori,
+    String? namaKategori,
     String? fasilitas,
     String? harga,
   }) async {
@@ -42,9 +42,9 @@ class KategoriDatabase {
         collectionReference.doc(id).collection("kategori").doc(documentId);
 
     Map<String, dynamic> data = {
-      "Nama kategori": nama_kategori,
-      "Fasilitas": fasilitas,
-      "Harga": harga,
+      "nama_kategori": namaKategori,
+      "fasilitas": fasilitas,
+      "harga": harga,
     };
 
     await documentReference

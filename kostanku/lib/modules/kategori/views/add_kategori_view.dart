@@ -60,7 +60,7 @@ class _AddKategoriViewState extends State<AddKategoriView> {
     return FloatingActionButton(
       onPressed: () async {
         await KategoriDatabase.create(
-          nama_kategori: _namaKategoriController.text,
+          namaKategori: _namaKategoriController.text,
           fasilitas: _fasilitasController.text,
           harga: _hargaController.text,
         );

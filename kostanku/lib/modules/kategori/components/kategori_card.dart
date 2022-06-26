@@ -3,14 +3,14 @@
 import 'package:flutter/material.dart';
 import 'package:kostanku/constants/pallete.dart';
 
-class categoryCard extends StatelessWidget {
-  String nama_kategori;
+class CategoryCard extends StatelessWidget {
+  String namaKategori;
   String fasilitas;
   String harga;
 
-  categoryCard(
+  CategoryCard(
       {Key? key,
-      required this.nama_kategori,
+      required this.namaKategori,
       required this.fasilitas,
       required this.harga})
       : super(key: key);
@@ -47,7 +47,7 @@ class categoryCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(8),
       ),
       child: Text(
-        nama_kategori,
+        namaKategori,
         style: TextStyle(color: Colors.white),
       ),
     );
@@ -64,7 +64,7 @@ class categoryCard extends StatelessWidget {
         ),
         SizedBox(height: 4),
         Text(
-          'Harga          : $harga /perbulan',
+          'Harga        : $harga /perbulan',
           textAlign: TextAlign.start,
           style: TextStyle(fontSize: 12),
         ),

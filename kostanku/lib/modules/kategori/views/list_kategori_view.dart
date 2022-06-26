@@ -63,12 +63,12 @@ class _ListKategoriViewState extends State<ListKategoriView> {
                     itemBuilder: (context, index) {
                       var data = snapshot.data!.docs[index].data() as dynamic;
                       // String documentId = snapshot.data!.docs[index].id;
-                      String nama_kategori = data["nama_kategori"] ?? "";
+                      String namaKategori = data["nama_kategori"] ?? "";
                       String fasilitas = data["fasilitas"] ?? "";
                       String harga = data["harga"] ?? "";
 
-                      return categoryCard(
-                        nama_kategori: nama_kategori,
+                      return CategoryCard(
+                        namaKategori: namaKategori,
                         fasilitas: fasilitas,
                         harga: harga,
                       );

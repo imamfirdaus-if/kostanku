@@ -3,11 +3,11 @@
 import 'package:flutter/material.dart';
 import 'package:kostanku/constants/pallete.dart';
 
-class KostCard extends StatelessWidget {
+class KamarCard extends StatelessWidget {
   String namaKost;
   String namaKategori;
   String namaKamar;
-  KostCard(
+  KamarCard(
       {Key? key,
       required this.namaKost,
       required this.namaKategori,
@@ -46,7 +46,7 @@ class KostCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(8),
       ),
       child: Text(
-        namaKost,
+        namaKamar,
         style: TextStyle(color: Colors.white),
       ),
     );
@@ -57,7 +57,7 @@ class KostCard extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Nama Kost    : $namaKost',
+          'Nama Kost  : $namaKost',
           textAlign: TextAlign.start,
           style: TextStyle(fontSize: 12),
         ),

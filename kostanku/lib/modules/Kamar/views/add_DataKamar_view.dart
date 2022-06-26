@@ -18,7 +18,7 @@ class AddKamarView extends StatefulWidget {
 
 class _AddKamarViewState extends State<AddKamarView> {
   final TextEditingController _namaKostController = TextEditingController();
-  final TextEditingController _kategoriController = TextEditingController();
+  final TextEditingController _namaKategoriController = TextEditingController();
   final TextEditingController _namaKamarController = TextEditingController();
 
   @override
@@ -61,7 +61,7 @@ class _AddKamarViewState extends State<AddKamarView> {
       onPressed: () async {
         await KamarDatabase.create(
           namaKost: _namaKostController.text,
-          namaKategori: _kategoriController.text,
+          namaKategori: _namaKategoriController.text,
           namaKamar: _namaKamarController.text,
         );
 
@@ -98,7 +98,7 @@ class _AddKamarViewState extends State<AddKamarView> {
         SizedBox(height: 20),
         CustomTextField(
           hintText: 'Kategori',
-          controller: _kategoriController,
+          controller: _namaKategoriController,
         ),
         SizedBox(height: 20),
         CustomTextField(

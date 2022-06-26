@@ -112,29 +112,7 @@ class _AddKostViewState extends State<AddKostView> {
           controller: _alamatController,
         ),
         SizedBox(height: 20),
-        Center(
-          child: _buildPinLocationButton(),
-        ),
       ],
-    );
-  }
-
-  Widget _buildPinLocationButton() {
-    return ElevatedButton(
-      onPressed: () {},
-      style: ButtonStyle(
-        backgroundColor: MaterialStateProperty.all(Pallete.primary),
-        elevation: MaterialStateProperty.all(0),
-        padding: MaterialStateProperty.all(
-          EdgeInsets.symmetric(vertical: 4, horizontal: 24),
-        ),
-        shape: MaterialStateProperty.all(
-          RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8),
-          ),
-        ),
-      ),
-      child: Text('Pasang Lokasi'),
     );
   }
 }

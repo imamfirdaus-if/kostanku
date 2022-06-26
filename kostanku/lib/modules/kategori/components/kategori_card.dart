@@ -4,15 +4,15 @@ import 'package:flutter/material.dart';
 import 'package:kostanku/constants/pallete.dart';
 
 class categoryCard extends StatelessWidget {
-  String categoryName;
-  String facility;
-  String price;
+  String nama_kategori;
+  String fasilitas;
+  String harga;
 
   categoryCard(
       {Key? key,
-      required this.categoryName,
-      required this.facility,
-      required this.price})
+      required this.nama_kategori,
+      required this.fasilitas,
+      required this.harga})
       : super(key: key);
 
   @override
@@ -47,7 +47,7 @@ class categoryCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(8),
       ),
       child: Text(
-        categoryName,
+        nama_kategori,
         style: TextStyle(color: Colors.white),
       ),
     );
@@ -58,25 +58,22 @@ class categoryCard extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Fasilitas  :',
-          textAlign: TextAlign.start,
-          style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600),
-        ),
-        SizedBox(height: 6),
-        Text(
-          facility,
+          'Nama Kategori           : $nama_kategori',
           textAlign: TextAlign.start,
           style: TextStyle(fontSize: 12),
         ),
-        SizedBox(height: 20),
-        Container(
-          padding: EdgeInsets.only(left: 172),
-          child: Text(price,
-              style: TextStyle(
-                fontWeight: FontWeight.w600,
-                fontSize: 13,
-              )),
-        )
+        SizedBox(height: 4),
+        Text(
+          'Fasilitas     : $fasilitas',
+          textAlign: TextAlign.start,
+          style: TextStyle(fontSize: 12),
+        ),
+        SizedBox(height: 4),
+        Text(
+          'Harga          : $harga',
+          textAlign: TextAlign.start,
+          style: TextStyle(fontSize: 12),
+        ),
       ],
     );
   }

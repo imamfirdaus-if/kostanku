@@ -1,5 +1,8 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
+import 'dart:developer';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:kostanku/components/custom_appbar.dart';
 import 'package:kostanku/components/custom_textfield.dart';
@@ -13,6 +16,26 @@ class AddKategoriView extends StatefulWidget {
 }
 
 class _AddKategoriViewState extends State<AddKategoriView> {
+  final TextEditingController _namaKategoriController = TextEditingController();
+  final TextEditingController _fasilitasController = TextEditingController();
+  final TextEditingController _hargaController = TextEditingController();
+
+  FirebaseFirestore firestore = FirebaseFirestore.instance;
+
+  CollectionReference kost = FirebaseFirestore.instance.collection("kategori");
+
+  Future<void> addKategori() {
+    return kost.add({
+      "nama_kategori": _namaKategoriController.text,
+      "fasilitas": _fasilitasController.text,
+      "harga": _hargaController.text,
+    }).then((value) {
+      log("Kategori added");
+    }).catchError((error) {
+      log(error);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,7 +73,9 @@ class _AddKategoriViewState extends State<AddKategoriView> {
 
   Widget _buildFAB() {
     return FloatingActionButton(
-      onPressed: () {},
+      onPressed: () {
+        addKategori();
+      },
       backgroundColor: Pallete.secondary,
       child: Icon(
         Icons.check_circle_rounded,
@@ -66,19 +91,18 @@ class _AddKategoriViewState extends State<AddKategoriView> {
         Text('Masukkan data dengan benar'),
         SizedBox(height: 20),
         CustomTextField(
-          hintText: 'Nama Kost',
-        ),
-        SizedBox(height: 20),
-        CustomTextField(
           hintText: 'Nama Kategori',
+          controller: _namaKategoriController,
         ),
         SizedBox(height: 20),
         CustomTextField(
           hintText: 'Fasilitas',
+          controller: _fasilitasController,
         ),
         SizedBox(height: 20),
         CustomTextField(
           hintText: 'Harga Sewa',
+          controller: _hargaController,
         ),
       ],
     );

@@ -51,9 +51,9 @@ class _ListKategoriViewState extends State<ListKategoriView> {
             physics: BouncingScrollPhysics(),
             itemBuilder: (context, index) {
               return categoryCard(
-                categoryName: 'VVIP',
-                facility: 'listrik, air, kamar mandi di dalam, wi-fi, ac',
-                price: 'Rp.1.500.000/Bulan',
+                nama_kategori: 'VVIP',
+                fasilitas: 'listrik, air, kamar mandi di dalam, wi-fi, ac',
+                harga: 'Rp.1.500.000/Bulan',
               );
             },
             separatorBuilder: (context, index) {

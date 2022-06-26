@@ -54,7 +54,6 @@ class _ListKamarViewState extends State<ListKamarView> {
           child: StreamBuilder<QuerySnapshot>(
               stream: KamarDatabase.read(),
               builder: (context, snapshot) {
-                log("${snapshot.data!.docs.length}");
                 if (snapshot.hasError) {
                   return Center(
                     child: Text("Error"),

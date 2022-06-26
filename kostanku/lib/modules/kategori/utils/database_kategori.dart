@@ -1,10 +1,17 @@
 import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
-final FirebaseFirestore firestore = FirebaseFirestore.instance;
-final CollectionReference collectionReference =
-    firestore.collection("kategori");
+final User? _user = FirebaseAuth.instance.currentUser;
+final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+final CollectionReference _collectionReference =
+    _firestore.collection("kategori");
+final Query query = _collectionReference.where(
+  "user_id",
+  isEqualTo: _user!.uid,
+);
+DocumentReference _documentReference = _collectionReference.doc();
 
 class KategoriDatabase {
   static String? id;
@@ -14,32 +21,31 @@ class KategoriDatabase {
     String? fasilitas,
     String? harga,
   }) async {
-    DocumentReference documentReference = collectionReference.doc();
-
     Map<String, dynamic> data = {
       "nama_kategori": namaKategori,
       "fasilitas": fasilitas,
       "harga": harga,
     };
 
-    await documentReference
+    await _documentReference
         .set(data)
         .whenComplete(() => log("Data ditambahkan"))
         .catchError((error) => log(error));
   }
 
   static Stream<QuerySnapshot> read() {
-    return collectionReference.snapshots();
+    return _collectionReference.snapshots();
   }
 
   static Future<void> update({
-    required String documentId,
+    required String idKategori,
+    String? userId,
     String? namaKategori,
     String? fasilitas,
     String? harga,
   }) async {
-    DocumentReference documentReference =
-        collectionReference.doc(id).collection("kategori").doc(documentId);
+    DocumentReference _documentReference =
+        _collectionReference.doc(id).collection("kategori").doc(idKategori);
 
     Map<String, dynamic> data = {
       "nama_kategori": namaKategori,
@@ -47,19 +53,19 @@ class KategoriDatabase {
       "harga": harga,
     };
 
-    await documentReference
+    await _documentReference
         .update(data)
         .whenComplete(() => log("Data ditambahkan"))
         .catchError((error) => log(error));
   }
 
   static Future<void> delete({
-    required documentId,
+    required idKategori,
   }) async {
-    DocumentReference documentReference =
-        collectionReference.doc(id).collection("kategori").doc(documentId);
+    DocumentReference _documentReference =
+        _collectionReference.doc(id).collection("kategori").doc(idKategori);
 
-    await documentReference
+    await _documentReference
         .delete()
         .whenComplete(() => log("Data dihapus"))
         .catchError((error) => log(error));

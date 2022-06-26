@@ -62,12 +62,13 @@ class _ListKategoriViewState extends State<ListKategoriView> {
                     physics: BouncingScrollPhysics(),
                     itemBuilder: (context, index) {
                       var data = snapshot.data!.docs[index].data() as dynamic;
-                      // String documentId = snapshot.data!.docs[index].id;
+                      String idKategori = snapshot.data!.docs[index].id;
                       String namaKategori = data["nama_kategori"] ?? "";
                       String fasilitas = data["fasilitas"] ?? "";
                       String harga = data["harga"] ?? "";
 
                       return CategoryCard(
+                        idKategori: idKategori,
                         namaKategori: namaKategori,
                         fasilitas: fasilitas,
                         harga: harga,

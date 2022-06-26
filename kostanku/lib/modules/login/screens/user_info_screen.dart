@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:kostanku/constants/pallete.dart';
 import 'package:kostanku/modules/login/res/custom_colors.dart';
 import 'package:kostanku/modules/login/screens/sign_in_screen.dart';
 import 'package:kostanku/modules/login/utils/authentication.dart';
@@ -49,10 +50,10 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: CustomColors.maincolor,
+      backgroundColor: Pallete.maincolor,
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: CustomColors.firebaseNavy,
+        backgroundColor: Pallete.firebaseNavy,
         title: AppBarTitle(),
       ),
       body: SafeArea(
@@ -69,7 +70,7 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
               _user.photoURL != null
                   ? ClipOval(
                       child: Material(
-                        color: CustomColors.firebaseGrey.withOpacity(0.3),
+                        color: Pallete.firebaseGrey.withOpacity(0.3),
                         child: Image.network(
                           _user.photoURL!,
                           fit: BoxFit.fitHeight,
@@ -78,13 +79,13 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
                     )
                   : ClipOval(
                       child: Material(
-                        color: CustomColors.firebaseGrey.withOpacity(0.3),
+                        color: Pallete.firebaseGrey.withOpacity(0.3),
                         child: Padding(
                           padding: const EdgeInsets.all(16.0),
                           child: Icon(
                             Icons.person,
                             size: 60,
-                            color: CustomColors.firebaseGrey,
+                            color: Pallete.firebaseGrey,
                           ),
                         ),
                       ),
@@ -93,7 +94,7 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
               Text(
                 'Hello',
                 style: TextStyle(
-                  color: CustomColors.blue_color,
+                  color: Pallete.blueColor,
                   fontSize: 26,
                 ),
               ),
@@ -101,7 +102,7 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
               Text(
                 _user.displayName!,
                 style: TextStyle(
-                  color: CustomColors.firebaseOrange,
+                  color: Pallete.firebaseOrange,
                   fontSize: 26,
                 ),
               ),
@@ -109,7 +110,7 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
               Text(
                 '( ${_user.email!} )',
                 style: TextStyle(
-                  color: CustomColors.firebaseOrange,
+                  color: Pallete.firebaseOrange,
                   fontSize: 20,
                   letterSpacing: 0.5,
                 ),
@@ -118,7 +119,7 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
               Text(
                 'You are now signed in using your Google account. To sign out of your account click the "Sign Out" button below.',
                 style: TextStyle(
-                    color: CustomColors.blue_color.withOpacity(0.8),
+                    color: Pallete.blueColor.withOpacity(0.8),
                     fontSize: 14,
                     letterSpacing: 0.2),
               ),

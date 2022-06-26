@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kostanku/constants/pallete.dart';
 import 'package:kostanku/modules/login/res/custom_colors.dart';
 import 'package:kostanku/modules/login/utils/authentication.dart';
 import 'package:kostanku/modules/login/widgets/google_sign_in_button.dart';
@@ -12,7 +13,7 @@ class _SignInScreenState extends State<SignInScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: CustomColors.maincolor,
+      backgroundColor: Pallete.maincolor,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.only(
@@ -50,7 +51,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   }
                   return CircularProgressIndicator(
                     valueColor: AlwaysStoppedAnimation<Color>(
-                      CustomColors.firebaseOrange,
+                      Pallete.firebaseOrange,
                     ),
                   );
                 },

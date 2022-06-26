@@ -1,16 +1,14 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'dart:developer';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:kostanku/components/custom_appbar.dart';
 import 'package:kostanku/constants/pallete.dart';
-import 'package:kostanku/modules/Kamar/components/DataKamar_card.dart';
-import 'package:kostanku/modules/Kamar/utils/database_kamar.dart';
-import 'package:kostanku/modules/Kamar/views/add_dataKamar_view.dart';
+import 'package:kostanku/modules/kamar/components/kamar_card.dart';
+import 'package:kostanku/modules/kamar/utils/database_kamar.dart';
+import 'package:kostanku/modules/kamar/views/add_kamar_view.dart';
 
 class ListKamarView extends StatefulWidget {
   const ListKamarView({Key? key}) : super(key: key);
@@ -52,51 +50,73 @@ class _ListKamarViewState extends State<ListKamarView> {
         SizedBox(height: 40),
         Flexible(
           child: StreamBuilder<QuerySnapshot>(
-              stream: KamarDatabase.read(),
-              builder: (context, snapshot) {
-                log("${snapshot.data!.docs.length}");
-                if (snapshot.hasError) {
+            stream: KamarDatabase.read(),
+            builder: (context, snapshot) {
+              if (snapshot.hasError) {
+                return Center(
+                  child: Text(
+                    "Terjadi kesalahan, silahkan coba lagi nanti",
+                    textAlign: TextAlign.center,
+                  ),
+                );
+              } else if (snapshot.hasData) {
+                var snapshotData = snapshot.data!;
+
+                if (snapshotData.docs.isEmpty) {
                   return Center(
-                    child: Text("Error"),
+                    child: Text(
+                      "Tidak ada data",
+                      style: TextStyle(
+                        color: Pallete.disabled,
+                      ),
+                    ),
                   );
-                } else if (snapshot.hasData || snapshot.data != null) {
+                } else {
                   return ListView.separated(
                     padding: EdgeInsets.fromLTRB(28, 0, 28, 20),
                     physics: BouncingScrollPhysics(),
                     itemBuilder: (context, index) {
                       var data = snapshot.data!.docs[index].data() as dynamic;
-                      // String documentId = snapshot.data!.docs[index].id;
+                      String documentId = snapshot.data!.docs[index].id;
                       String namaKost = data["nama_kost"] ?? "";
-                      String namaKategori = data["nama_katgeori"] ?? "";
+                      String namaKategori = data["nama_kategori"] ?? "";
                       String namaKamar = data["nama_kamar"] ?? "";
 
                       return KamarCard(
+                        documentId: documentId,
                         namaKost: namaKost,
                         namaKategori: namaKategori,
                         namaKamar: namaKamar,
+                        onTap: () => Navigator.push(
+                          context,
+                          CupertinoPageRoute(
+                            builder: (context) => AddKamarView(
+                              isEdit: true,
+                              documentId: documentId,
+                              namaKamar: namaKamar,
+                              namaKost: namaKost,
+                              namaKategori: namaKategori,
+                            ),
+                          ),
+                        ),
                       );
                     },
                     separatorBuilder: (context, index) {
                       return SizedBox(height: 28);
                     },
-                    itemCount: snapshot.data!.docs.length,
-                  );
-                } else if (snapshot.data == null) {
-                  return Center(
-                    child: Text(
-                      "Data kosong",
-                      style: TextStyle(color: Colors.black),
-                    ),
+                    itemCount: snapshotData.docs.length,
                   );
                 }
+              }
 
-                return Center(
-                  child: SpinKitThreeBounce(
-                    color: Pallete.primary,
-                    size: 20,
-                  ),
-                );
-              }),
+              return Center(
+                child: SpinKitThreeBounce(
+                  color: Pallete.primary,
+                  size: 20,
+                ),
+              );
+            },
+          ),
         ),
       ],
     );

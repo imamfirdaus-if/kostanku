@@ -5,7 +5,6 @@ import 'dart:developer';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:kostanku/components/custom_appbar.dart';
 import 'package:kostanku/components/custom_dialog.dart';

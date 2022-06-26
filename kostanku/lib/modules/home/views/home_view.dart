@@ -5,9 +5,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:kostanku/components/custom_dialog.dart';
 import 'package:kostanku/constants/pallete.dart';
-import 'package:kostanku/modules/Kamar/views/list_dataKamar_view.dart';
 import 'package:kostanku/modules/home/components/grid_item.dart';
 import 'package:kostanku/modules/home/components/report_item.dart';
+import 'package:kostanku/modules/kamar/views/list_kamar_view.dart';
 import 'package:kostanku/modules/kategori/views/list_kategori_view.dart';
 import 'package:kostanku/modules/kost/views/list_kost_view.dart';
 import 'package:kostanku/modules/login/screens/sign_in_screen.dart';
@@ -53,17 +53,19 @@ class _HomeViewState extends State<HomeView> {
   }
 
   Widget _buildBody() {
-    return Padding(
-      padding: EdgeInsets.symmetric(vertical: 50),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          _buildWelcomeSection(),
-          SizedBox(height: 20),
-          _buildReport(),
-          SizedBox(height: 20),
-          _buildBottomSection(),
-        ],
+    return SafeArea(
+      child: Container(
+        padding: EdgeInsets.only(top: 35),
+        child: Column(
+          // crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _buildWelcomeSection(),
+            SizedBox(height: 30),
+            _buildReport(),
+            SizedBox(height: 30),
+            _buildBottomSection(),
+          ],
+        ),
       ),
     );
   }
@@ -162,8 +164,8 @@ class _HomeViewState extends State<HomeView> {
       flex: 2,
       child: GridView.count(
         crossAxisCount: 2,
-        mainAxisSpacing: 10,
-        crossAxisSpacing: 10,
+        mainAxisSpacing: 16,
+        crossAxisSpacing: 16,
         padding: EdgeInsets.symmetric(horizontal: 24),
         physics: NeverScrollableScrollPhysics(),
         children: List.generate(

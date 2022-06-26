@@ -14,5 +14,5 @@ class Pallete {
   static final Color firebaseGrey = Color(0xFFECEFF1);
   static final Color googleBackground = Color(0xFF4285F4);
   static final Color maincolor = Color(0xFFFFFFFF);
-  static final Color blue_color = Color(0xFF1D80C9);
+  static final Color blueColor = Color(0xFF1D80C9);
 }

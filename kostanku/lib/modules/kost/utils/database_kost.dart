@@ -6,15 +6,13 @@ import 'package:firebase_auth/firebase_auth.dart';
 final User? _user = FirebaseAuth.instance.currentUser;
 final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 final CollectionReference _collectionReference = _firestore.collection("kost");
-final Query query = _collectionReference.where(
+DocumentReference _documentReference = _collectionReference.doc();
+final Query _query = _collectionReference.where(
   "user_id",
   isEqualTo: _user!.uid,
 );
-DocumentReference _documentReference = _collectionReference.doc();
 
 class KostDatabase {
-  static String? id;
-
   static Future<void> create({
     String? namaKost,
     String? namaPemilik,
@@ -36,7 +34,7 @@ class KostDatabase {
   }
 
   static Stream<QuerySnapshot> read() {
-    return query.snapshots();
+    return _query.snapshots();
   }
 
   static Future<void> update({

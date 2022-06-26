@@ -1,38 +1,45 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, must_be_immutable
 
 import 'package:flutter/material.dart';
 import 'package:kostanku/constants/pallete.dart';
 
 class KamarCard extends StatelessWidget {
+  String documentId;
   String namaKost;
   String namaKategori;
   String namaKamar;
-  KamarCard(
-      {Key? key,
-      required this.namaKost,
-      required this.namaKategori,
-      required this.namaKamar})
-      : super(key: key);
+  Function()? onTap;
+  KamarCard({
+    Key? key,
+    required this.documentId,
+    required this.namaKost,
+    required this.namaKategori,
+    required this.namaKamar,
+    this.onTap,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(8),
-      ),
-      child: Padding(
-        padding: EdgeInsets.symmetric(vertical: 20, horizontal: 24),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Center(
-              child: _buildKamarName(),
-            ),
-            SizedBox(height: 16),
-            _buildKamarInformation(),
-          ],
+    return InkWell(
+      onTap: onTap,
+      child: Container(
+        width: double.infinity,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(8),
+        ),
+        child: Padding(
+          padding: EdgeInsets.symmetric(vertical: 20, horizontal: 24),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Center(
+                child: _buildKamarName(),
+              ),
+              SizedBox(height: 16),
+              _buildKamarInformation(),
+            ],
+          ),
         ),
       ),
     );
@@ -63,7 +70,7 @@ class KamarCard extends StatelessWidget {
         ),
         SizedBox(height: 4),
         Text(
-          'Kategori   : $namaKategori',
+          'Kategori       : $namaKategori',
           textAlign: TextAlign.start,
           style: TextStyle(fontSize: 12),
         ),

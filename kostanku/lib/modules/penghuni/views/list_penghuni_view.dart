@@ -4,8 +4,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:kostanku/components/custom_appbar.dart';
 import 'package:kostanku/constants/pallete.dart';
-import 'package:kostanku/modules/Kamar/views/add_DataKamar_view.dart';
-import 'package:kostanku/modules/kost/views/add_kost_view.dart';
 import 'package:kostanku/modules/penghuni/components/penghuni_grid_item.dart';
 import 'package:kostanku/modules/penghuni/views/add_DataPenghuni_view.dart';
 

@@ -2,6 +2,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:kostanku/components/custom_appbar.dart';
 import 'package:kostanku/components/custom_textfield.dart';
 import 'package:kostanku/constants/pallete.dart';
@@ -70,6 +71,10 @@ class _AddKostViewState extends State<AddKostView> {
           alamat: _alamatController.text,
         );
 
+        Fluttertoast.showToast(
+          msg: "Data berhasil ditambahkan",
+          toastLength: Toast.LENGTH_SHORT,
+        );
         Navigator.pop(context);
         Navigator.pushReplacement(
           context,

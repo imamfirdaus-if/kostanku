@@ -1,58 +1,74 @@
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+
 import 'package:flutter/material.dart';
 import 'package:kostanku/constants/pallete.dart';
 
-class DataKamarCard extends StatelessWidget {
-  String kostName;
-  String categoryName;
-
-  DataKamarCard({
-    Key? key,
-    required this.kostName,
-    required this.categoryName,
-  }) : super(key: key);
+class KostCard extends StatelessWidget {
+  String namaKost;
+  String namaKategori;
+  String namaKamar;
+  KostCard(
+      {Key? key,
+      required this.namaKost,
+      required this.namaKategori,
+      required this.namaKamar})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
+      width: double.infinity,
       decoration: BoxDecoration(
-          color: Colors.white70, borderRadius: BorderRadius.circular(8)),
-      child: Row(
-        children: [
-          Container(
-            width: 120,
-            height: 120,
-            decoration: BoxDecoration(
-              color: Pallete.secondary,
-              borderRadius: BorderRadius.circular(8),
-              image: DecorationImage(
-                  image: AssetImage('assets/images/pict1.png'),
-                  fit: BoxFit.cover),
-            ),
-          ),
-          SizedBox(width: 18),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                kostName,
-                style: TextStyle(
-                  // color: Colors.white,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-              SizedBox(height: 3),
-              Text(
-                categoryName,
-                style: TextStyle(
-                  // color: Colors.white,
-                  fontSize: 12,
-                ),
-              ),
-            ],
-          ),
-        ],
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(8),
       ),
+      child: Padding(
+        padding: EdgeInsets.symmetric(vertical: 20, horizontal: 24),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Center(
+              child: _buildKamarName(),
+            ),
+            SizedBox(height: 16),
+            _buildKamarInformation(),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildKamarName() {
+    return Container(
+      padding: EdgeInsets.symmetric(vertical: 6, horizontal: 32),
+      decoration: BoxDecoration(
+        color: Pallete.primary,
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: Text(
+        namaKost,
+        style: TextStyle(color: Colors.white),
+      ),
+    );
+  }
+
+  Widget _buildKamarInformation() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'Nama Kost    : $namaKost',
+          textAlign: TextAlign.start,
+          style: TextStyle(fontSize: 12),
+        ),
+        SizedBox(height: 4),
+        Text(
+          'Kategori   : $namaKategori',
+          textAlign: TextAlign.start,
+          style: TextStyle(fontSize: 12),
+        ),
+        SizedBox(height: 4),
+      ],
     );
   }
 }

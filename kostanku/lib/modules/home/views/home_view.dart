@@ -28,7 +28,7 @@ class _HomeViewState extends State<HomeView> {
   List gridItemNavigator = [
     ListKostView(),
     ListKategoriView(),
-    ListDataKamar(),
+    ListKamarView(),
     ListPenghuniView(),
   ];
 

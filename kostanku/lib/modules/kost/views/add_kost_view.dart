@@ -1,12 +1,12 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
-import 'dart:developer';
-
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:kostanku/components/custom_appbar.dart';
 import 'package:kostanku/components/custom_textfield.dart';
 import 'package:kostanku/constants/pallete.dart';
+import 'package:kostanku/modules/kost/utils/database.dart';
+import 'package:kostanku/modules/kost/views/list_kost_view.dart';
 
 class AddKostView extends StatefulWidget {
   const AddKostView({Key? key}) : super(key: key);
@@ -20,23 +20,6 @@ class _AddKostViewState extends State<AddKostView> {
   final TextEditingController _namaPemilikController = TextEditingController();
   final TextEditingController _nomorHpController = TextEditingController();
   final TextEditingController _alamatController = TextEditingController();
-
-  FirebaseFirestore firestore = FirebaseFirestore.instance;
-
-  CollectionReference kost = FirebaseFirestore.instance.collection("kost");
-
-  Future<void> addKost() {
-    return kost.add({
-      "nama_kost": _namaKostController.text,
-      "nama_pemilik": _namaPemilikController.text,
-      "nomor_hp": _nomorHpController.text,
-      "alamat": _alamatController.text,
-    }).then((value) {
-      log("Kost added");
-    }).catchError((error) {
-      log(error);
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -70,13 +53,30 @@ class _AddKostViewState extends State<AddKostView> {
   }
 
   AppBar _buildAppbar() {
-    return CustomAppbar(context: context, backButton: true, deleteButton: true);
+    return CustomAppbar(
+      context: context,
+      backButton: true,
+      // deleteButton: true,
+    );
   }
 
   Widget _buildFAB() {
     return FloatingActionButton(
-      onPressed: () {
-        addKost();
+      onPressed: () async {
+        await KostDatabase.create(
+          namaKost: _namaKostController.text,
+          namaPemilik: _namaPemilikController.text,
+          nomorHP: _nomorHpController.text,
+          alamat: _alamatController.text,
+        );
+
+        Navigator.pop(context);
+        Navigator.pushReplacement(
+          context,
+          CupertinoPageRoute(
+            builder: (context) => ListKostView(),
+          ),
+        );
       },
       backgroundColor: Pallete.secondary,
       child: Icon(

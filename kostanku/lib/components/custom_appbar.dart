@@ -11,6 +11,7 @@ AppBar CustomAppbar({
   Widget? icon,
   bool deleteButton = false,
   void Function()? onTap,
+  void Function()? onDelete,
   Color? backgroundColor,
 }) {
   return AppBar(
@@ -28,16 +29,11 @@ AppBar CustomAppbar({
     ),
     actions: [
       IconButton(
-          padding: EdgeInsets.only(right: 20),
-          onPressed: () {
-            if (deleteButton) {
-              Navigator.pop(context);
-            } else {
-              onTap;
-            }
-          },
-          icon: deleteButton ? Icon(IconlyBold.delete) : icon ?? Container(),
-          color: Pallete.error)
+        // padding: EdgeInsets.only(right: 20),
+        onPressed: onDelete,
+        icon: deleteButton ? Icon(IconlyBold.delete) : icon ?? Container(),
+        color: Pallete.error,
+      )
     ],
     backgroundColor: backgroundColor ?? Pallete.background,
     elevation: 0,

@@ -1,15 +1,19 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:kostanku/constants/pallete.dart';
+import 'package:kostanku/modules/kost/views/add_kost_view.dart';
 
 class KostCard extends StatelessWidget {
+  String? documentId;
   String kostName;
   String ownerName;
   String phoneNumber;
   String address;
   KostCard({
     Key? key,
+    required this.documentId,
     required this.kostName,
     required this.ownerName,
     required this.phoneNumber,
@@ -18,25 +22,42 @@ class KostCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(8),
-      ),
-      child: Padding(
-        padding: EdgeInsets.symmetric(vertical: 20, horizontal: 24),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Center(
-              child: _buildKostName(),
+    return InkWell(
+      onTap: () {
+        Navigator.push(
+          context,
+          CupertinoPageRoute(
+            builder: (context) => AddKostView(
+              isEdit: true,
+              documentId: documentId,
+              namaKost: kostName,
+              namaPemilik: ownerName,
+              nomorHP: phoneNumber,
+              alamat: address,
             ),
-            SizedBox(height: 16),
-            _buildKostInformation(),
-            SizedBox(height: 12),
-            _buildLocationButton(),
-          ],
+          ),
+        );
+      },
+      child: Container(
+        width: double.infinity,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(8),
+        ),
+        child: Padding(
+          padding: EdgeInsets.symmetric(vertical: 20, horizontal: 24),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Center(
+                child: _buildKostName(),
+              ),
+              SizedBox(height: 16),
+              _buildKostInformation(),
+              SizedBox(height: 20),
+              _buildLocationButton(),
+            ],
+          ),
         ),
       ),
     );
@@ -90,7 +111,7 @@ class KostCard extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
           Text(
-            'Lokasi',
+            'Belum ada lokasi',
             style: TextStyle(fontSize: 12),
           ),
           Icon(

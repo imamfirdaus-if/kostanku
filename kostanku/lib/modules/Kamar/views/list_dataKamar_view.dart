@@ -1,5 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -48,16 +50,17 @@ class _ListKamarViewState extends State<ListKamarView> {
           ),
         ),
         SizedBox(height: 40),
-        StreamBuilder<QuerySnapshot>(
-            stream: KamarDatabase.read(),
-            builder: (context, snapshot) {
-              if (snapshot.hasError) {
-                return Center(
-                  child: Text("Error"),
-                );
-              } else if (snapshot.hasData || snapshot.data != null) {
-                return Flexible(
-                  child: ListView.separated(
+        Flexible(
+          child: StreamBuilder<QuerySnapshot>(
+              stream: KamarDatabase.read(),
+              builder: (context, snapshot) {
+                log("${snapshot.data!.docs.length}");
+                if (snapshot.hasError) {
+                  return Center(
+                    child: Text("Error"),
+                  );
+                } else if (snapshot.hasData || snapshot.data != null) {
+                  return ListView.separated(
                     padding: EdgeInsets.fromLTRB(28, 0, 28, 20),
                     physics: BouncingScrollPhysics(),
                     itemBuilder: (context, index) {
@@ -77,17 +80,24 @@ class _ListKamarViewState extends State<ListKamarView> {
                       return SizedBox(height: 28);
                     },
                     itemCount: snapshot.data!.docs.length,
+                  );
+                } else if (snapshot.data == null) {
+                  return Center(
+                    child: Text(
+                      "Data kosong",
+                      style: TextStyle(color: Colors.black),
+                    ),
+                  );
+                }
+
+                return Center(
+                  child: SpinKitThreeBounce(
+                    color: Pallete.primary,
+                    size: 20,
                   ),
                 );
-              }
-
-              return Center(
-                child: SpinKitThreeBounce(
-                  color: Pallete.primary,
-                  size: 20,
-                ),
-              );
-            }),
+              }),
+        ),
       ],
     );
   }

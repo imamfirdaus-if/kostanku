@@ -1,7 +1,9 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:kostanku/components/custom_dialog.dart';
 import 'package:kostanku/constants/pallete.dart';
 import 'package:kostanku/modules/Kamar/views/list_dataKamar_view.dart';
 import 'package:kostanku/modules/home/components/grid_item.dart';
@@ -18,6 +20,8 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
+  final User? _user = FirebaseAuth.instance.currentUser;
+
   List<String> gridItemTitles = [
     'Daftar Kost',
     'Daftar Kategori',
@@ -74,7 +78,7 @@ class _HomeViewState extends State<HomeView> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Halo',
+                'Halo, ${_user!.displayName}',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 20,
@@ -90,7 +94,23 @@ class _HomeViewState extends State<HomeView> {
           ),
           IconButton(
             onPressed: () {
-              showConfirmationDialog();
+              showConfirmationDialog(
+                context: context,
+                title: "Apakah anda yakin ingin keluar?",
+                onYes: () async {
+                  await Authentication.signOut(context: context);
+                  Navigator.pushAndRemoveUntil(
+                    context,
+                    CupertinoPageRoute(
+                      builder: (context) => SignInScreen(),
+                    ),
+                    (route) => false,
+                  );
+                },
+                onNo: () {
+                  Navigator.pop(context);
+                },
+              );
             },
             icon: Icon(Icons.logout),
           ),
@@ -134,73 +154,6 @@ class _HomeViewState extends State<HomeView> {
           ),
         ],
       ),
-    );
-  }
-
-  showConfirmationDialog() {
-    return showDialog(
-      context: context,
-      builder: (context) {
-        return Scaffold(
-          body: Container(
-            // width: 200,
-            // height: 200,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(8),
-              // color: Colors.white,
-            ),
-            padding: EdgeInsets.all(16),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text('Apakah anda yakin ingin keluar?'),
-                Row(
-                  children: [
-                    Expanded(
-                      child: ElevatedButton(
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                        style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all(
-                            Colors.white,
-                          ),
-                        ),
-                        child: Text(
-                          'Tidak',
-                          style: TextStyle(color: Colors.black),
-                        ),
-                      ),
-                    ),
-                    SizedBox(width: 16),
-                    Expanded(
-                      child: ElevatedButton(
-                        onPressed: () async {
-                          await Authentication.signOut(context: context);
-                          Navigator.pushAndRemoveUntil(
-                            context,
-                            CupertinoPageRoute(
-                              builder: (context) => SignInScreen(),
-                            ),
-                            (route) => false,
-                          );
-                          // Navigator.pushReplacement(
-                          //   context,
-                          //   CupertinoPageRoute(
-                          //     builder: (context) => SignInScreen(),
-                          //   ),
-                          // );
-                        },
-                        child: Text('Ya'),
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-        );
-      },
     );
   }
 

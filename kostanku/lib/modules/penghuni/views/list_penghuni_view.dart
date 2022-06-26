@@ -1,16 +1,17 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:kostanku/components/custom_appbar.dart';
 import 'package:kostanku/constants/pallete.dart';
-import 'package:kostanku/modules/penghuni/components/penghuni_grid_item.dart';
+import 'package:kostanku/modules/penghuni/components/penghuni_card.dart';
+import 'package:kostanku/modules/penghuni/utils/database_penghuni.dart';
 import 'package:kostanku/modules/penghuni/views/add_DataPenghuni_view.dart';
 
 class ListPenghuniView extends StatefulWidget {
-  const ListPenghuniView({
-    Key? key,
-  }) : super(key: key);
+  const ListPenghuniView({Key? key}) : super(key: key);
 
   @override
   State<ListPenghuniView> createState() => _ListPenghuniViewState();
@@ -47,25 +48,57 @@ class _ListPenghuniViewState extends State<ListPenghuniView> {
           ),
         ),
         SizedBox(height: 40),
-        Flexible(
-          child: GridView.count(
-            crossAxisCount: 2,
-            padding: EdgeInsets.fromLTRB(28, 0, 28, 20),
-            physics: BouncingScrollPhysics(),
-            mainAxisSpacing: 24,
-            crossAxisSpacing: 24,
-            childAspectRatio: 1 / 1.3,
-            children: List.generate(
-              20,
-              (index) => PenghuniGridItem(
-                name: 'Farhan Rizky',
-                kostName: 'Kost Melati',
-                kostCategory: 'VVIP',
-                phoneNumber: "8888888888888",
-              ),
-            ),
-          ),
-        ),
+        StreamBuilder<QuerySnapshot>(
+            stream: PenghuniDatabase.read(),
+            builder: (context, snapshot) {
+              if (snapshot.hasError) {
+                return Center(
+                  child: Text("Error"),
+                );
+              } else if (snapshot.hasData || snapshot.data != null) {
+                return Flexible(
+                  child: ListView.separated(
+                    padding: EdgeInsets.fromLTRB(28, 0, 28, 20),
+                    physics: BouncingScrollPhysics(),
+                    itemBuilder: (context, index) {
+                      var data = snapshot.data!.docs[index].data() as dynamic;
+                      String idPenghuni = snapshot.data!.docs[index].id;
+                      String namaKost = data["nama_kost"] ?? "";
+                      String namaKategori = data["nama_kategori"] ?? "";
+                      String namakamar = data["nama_kamar"] ?? "";
+                      String namaPenghuni = data["nama_penghuni"] ?? "";
+                      String kontak = data["kontak"] ?? "";
+                      String kontakDarurat = data["kontak_darurat"] ?? "";
+                      String alamatAsal = data["alamat"] ?? "";
+                      String pekerjaan = data["pekerjaan"] ?? "";
+
+                      return PenghuniCard(
+                        idPenghuni: idPenghuni,
+                        namaKost: namaKost,
+                        namaKategori: namaKategori,
+                        namaKamar: namakamar,
+                        namaPenghuni: namaPenghuni,
+                        kontak: kontak,
+                        kontakDarurat: kontakDarurat,
+                        alamatAsal: alamatAsal,
+                        pekerjaan: pekerjaan,
+                      );
+                    },
+                    separatorBuilder: (context, index) {
+                      return SizedBox(height: 28);
+                    },
+                    itemCount: snapshot.data!.docs.length,
+                  ),
+                );
+              }
+
+              return Center(
+                child: SpinKitThreeBounce(
+                  color: Pallete.primary,
+                  size: 20,
+                ),
+              );
+            }),
       ],
     );
   }
@@ -75,7 +108,7 @@ class _ListPenghuniViewState extends State<ListPenghuniView> {
       onPressed: () => Navigator.push(
         context,
         CupertinoPageRoute(
-          builder: (context) => AddDataPenghuni(),
+          builder: (context) => AddPenghuniView(),
         ),
       ),
       backgroundColor: Pallete.secondary,

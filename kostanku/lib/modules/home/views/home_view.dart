@@ -5,14 +5,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:kostanku/components/custom_dialog.dart';
 import 'package:kostanku/constants/pallete.dart';
+import 'package:kostanku/modules/Kamar/views/list_kamar_view.dart';
 import 'package:kostanku/modules/home/components/grid_item.dart';
 import 'package:kostanku/modules/home/components/report_item.dart';
-import 'package:kostanku/modules/kamar/views/list_kamar_view.dart';
+import 'package:kostanku/modules/penghuni/views/list_penghuni_view.dart';
 import 'package:kostanku/modules/kategori/views/list_kategori_view.dart';
 import 'package:kostanku/modules/kost/views/list_kost_view.dart';
 import 'package:kostanku/modules/login/screens/sign_in_screen.dart';
 import 'package:kostanku/modules/login/utils/authentication.dart';
-import 'package:kostanku/modules/penghuni/views/list_penghuni_view.dart';
 
 class HomeView extends StatefulWidget {
   @override

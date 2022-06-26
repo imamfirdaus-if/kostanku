@@ -58,19 +58,13 @@ class categoryCard extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Nama Kategori           : $nama_kategori',
-          textAlign: TextAlign.start,
-          style: TextStyle(fontSize: 12),
-        ),
-        SizedBox(height: 4),
-        Text(
           'Fasilitas     : $fasilitas',
           textAlign: TextAlign.start,
           style: TextStyle(fontSize: 12),
         ),
         SizedBox(height: 4),
         Text(
-          'Harga          : $harga',
+          'Harga          : $harga /perbulan',
           textAlign: TextAlign.start,
           style: TextStyle(fontSize: 12),
         ),

@@ -1,12 +1,13 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
-import 'dart:developer';
-
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:kostanku/components/custom_appbar.dart';
 import 'package:kostanku/components/custom_textfield.dart';
 import 'package:kostanku/constants/pallete.dart';
+import 'package:kostanku/modules/kategori/utils/database_kategori.dart';
+import 'package:kostanku/modules/kategori/views/list_kategori_view.dart';
 
 class AddKategoriView extends StatefulWidget {
   const AddKategoriView({Key? key}) : super(key: key);
@@ -19,22 +20,6 @@ class _AddKategoriViewState extends State<AddKategoriView> {
   final TextEditingController _namaKategoriController = TextEditingController();
   final TextEditingController _fasilitasController = TextEditingController();
   final TextEditingController _hargaController = TextEditingController();
-
-  FirebaseFirestore firestore = FirebaseFirestore.instance;
-
-  CollectionReference kost = FirebaseFirestore.instance.collection("kategori");
-
-  Future<void> addKategori() {
-    return kost.add({
-      "nama_kategori": _namaKategoriController.text,
-      "fasilitas": _fasilitasController.text,
-      "harga": _hargaController.text,
-    }).then((value) {
-      log("Kategori added");
-    }).catchError((error) {
-      log(error);
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -73,8 +58,24 @@ class _AddKategoriViewState extends State<AddKategoriView> {
 
   Widget _buildFAB() {
     return FloatingActionButton(
-      onPressed: () {
-        addKategori();
+      onPressed: () async {
+        await KategoriDatabase.create(
+          nama_kategori: _namaKategoriController.text,
+          fasilitas: _fasilitasController.text,
+          harga: _hargaController.text,
+        );
+
+        Fluttertoast.showToast(
+          msg: "Data berhasil ditambahkan",
+          toastLength: Toast.LENGTH_SHORT,
+        );
+        Navigator.pop(context);
+        Navigator.pushReplacement(
+          context,
+          CupertinoPageRoute(
+            builder: (context) => ListKategoriView(),
+          ),
+        );
       },
       backgroundColor: Pallete.secondary,
       child: Icon(

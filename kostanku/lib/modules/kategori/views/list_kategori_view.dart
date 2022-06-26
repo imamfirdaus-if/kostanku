@@ -1,11 +1,14 @@
+// ignore_for_file: prefer_const_constructors
+
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:kostanku/components/custom_appbar.dart';
 import 'package:kostanku/constants/pallete.dart';
-import 'package:kostanku/modules/kost/components/kost_card.dart';
-import 'package:kostanku/modules/kost/views/add_kost_view.dart';
 import 'package:kostanku/modules/kategori/components/kategori_card.dart';
-import 'package:kostanku/modules/kategori/views/list_kategori_view.dart';
-import 'add_kategori_view.dart';
+import 'package:kostanku/modules/kategori/utils/database_kategori.dart';
+import 'package:kostanku/modules/kategori/views/add_kategori_view.dart';
 
 class ListKategoriView extends StatefulWidget {
   const ListKategoriView({Key? key}) : super(key: key);
@@ -44,24 +47,47 @@ class _ListKategoriViewState extends State<ListKategoriView> {
             fontWeight: FontWeight.bold,
           ),
         ),
-        SizedBox(height: 20),
-        Flexible(
-          child: ListView.separated(
-            padding: EdgeInsets.fromLTRB(28, 0, 28, 20),
-            physics: BouncingScrollPhysics(),
-            itemBuilder: (context, index) {
-              return categoryCard(
-                nama_kategori: 'VVIP',
-                fasilitas: 'listrik, air, kamar mandi di dalam, wi-fi, ac',
-                harga: 'Rp.1.500.000/Bulan',
+        SizedBox(height: 40),
+        StreamBuilder<QuerySnapshot>(
+            stream: KategoriDatabase.read(),
+            builder: (context, snapshot) {
+              if (snapshot.hasError) {
+                return Center(
+                  child: Text("Error"),
+                );
+              } else if (snapshot.hasData || snapshot.data != null) {
+                return Flexible(
+                  child: ListView.separated(
+                    padding: EdgeInsets.fromLTRB(28, 0, 28, 20),
+                    physics: BouncingScrollPhysics(),
+                    itemBuilder: (context, index) {
+                      var data = snapshot.data!.docs[index].data() as dynamic;
+                      // String documentId = snapshot.data!.docs[index].id;
+                      String nama_kategori = data["nama_kategori"] ?? "";
+                      String fasilitas = data["fasilitas"] ?? "";
+                      String harga = data["harga"] ?? "";
+
+                      return categoryCard(
+                        nama_kategori: nama_kategori,
+                        fasilitas: fasilitas,
+                        harga: harga,
+                      );
+                    },
+                    separatorBuilder: (context, index) {
+                      return SizedBox(height: 28);
+                    },
+                    itemCount: snapshot.data!.docs.length,
+                  ),
+                );
+              }
+
+              return Center(
+                child: SpinKitThreeBounce(
+                  color: Pallete.primary,
+                  size: 20,
+                ),
               );
-            },
-            separatorBuilder: (context, index) {
-              return SizedBox(height: 28);
-            },
-            itemCount: 10,
-          ),
-        ),
+            }),
       ],
     );
   }
@@ -70,7 +96,7 @@ class _ListKategoriViewState extends State<ListKategoriView> {
     return FloatingActionButton(
       onPressed: () => Navigator.push(
         context,
-        MaterialPageRoute(
+        CupertinoPageRoute(
           builder: (context) => AddKategoriView(),
         ),
       ),

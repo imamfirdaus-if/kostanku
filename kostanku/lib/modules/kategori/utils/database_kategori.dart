@@ -44,28 +44,28 @@ class KategoriDatabase {
     String? fasilitas,
     String? harga,
   }) async {
-    DocumentReference _documentReference =
-        _collectionReference.doc(id).collection("kategori").doc(idKategori);
+    _documentReference =
+        _documentReference.collection("kategori").doc(idKategori);
 
     Map<String, dynamic> data = {
+      "user_id": userId,
       "nama_kategori": namaKategori,
       "fasilitas": fasilitas,
       "harga": harga,
     };
 
-    await _documentReference
+    await _collectionReference
+        .doc(idKategori)
         .update(data)
-        .whenComplete(() => log("Data ditambahkan"))
-        .catchError((error) => log(error));
+        .whenComplete(() => log("Data diubah"))
+        .catchError((error) => log("error"));
   }
 
   static Future<void> delete({
     required idKategori,
   }) async {
-    DocumentReference _documentReference =
-        _collectionReference.doc(id).collection("kategori").doc(idKategori);
-
-    await _documentReference
+    await _collectionReference
+        .doc(idKategori)
         .delete()
         .whenComplete(() => log("Data dihapus"))
         .catchError((error) => log(error));

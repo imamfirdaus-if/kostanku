@@ -48,16 +48,16 @@ class _ListKategoriViewState extends State<ListKategoriView> {
           ),
         ),
         SizedBox(height: 40),
-        StreamBuilder<QuerySnapshot>(
-            stream: KategoriDatabase.read(),
-            builder: (context, snapshot) {
-              if (snapshot.hasError) {
-                return Center(
-                  child: Text("Error"),
-                );
-              } else if (snapshot.hasData || snapshot.data != null) {
-                return Flexible(
-                  child: ListView.separated(
+        Flexible(
+          child: StreamBuilder<QuerySnapshot>(
+              stream: KategoriDatabase.read(),
+              builder: (context, snapshot) {
+                if (snapshot.hasError) {
+                  return Center(
+                    child: Text("Error"),
+                  );
+                } else if (snapshot.hasData || snapshot.data != null) {
+                  return ListView.separated(
                     padding: EdgeInsets.fromLTRB(28, 0, 28, 20),
                     physics: BouncingScrollPhysics(),
                     itemBuilder: (context, index) {
@@ -78,17 +78,17 @@ class _ListKategoriViewState extends State<ListKategoriView> {
                       return SizedBox(height: 28);
                     },
                     itemCount: snapshot.data!.docs.length,
+                  );
+                }
+
+                return Center(
+                  child: SpinKitThreeBounce(
+                    color: Pallete.primary,
+                    size: 20,
                   ),
                 );
-              }
-
-              return Center(
-                child: SpinKitThreeBounce(
-                  color: Pallete.primary,
-                  size: 20,
-                ),
-              );
-            }),
+              }),
+        ),
       ],
     );
   }

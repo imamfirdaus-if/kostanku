@@ -24,6 +24,7 @@ class AddPenghuniView extends StatefulWidget {
   String? kontakDarurat;
   String? alamatAsal;
   String? pekerjaan;
+  String? documentId;
   bool isEdit;
   AddPenghuniView({
     Key? key,
@@ -37,6 +38,7 @@ class AddPenghuniView extends StatefulWidget {
     this.kontakDarurat,
     this.alamatAsal,
     this.pekerjaan,
+    this.documentId,
   }) : super(key: key);
 
   @override
@@ -55,6 +57,7 @@ class _AddPenghuniViewState extends State<AddPenghuniView> {
   final TextEditingController _pekerjaanController = TextEditingController();
   final User? _user = FirebaseAuth.instance.currentUser;
   late String title;
+  
 
   @override
   void initState() {
@@ -63,6 +66,7 @@ class _AddPenghuniViewState extends State<AddPenghuniView> {
 
     if (widget.isEdit) {
       log(widget.idPenghuni!);
+      // docume
       _namaKostController.text = widget.namaKost!;
       _namaKategoriController.text = widget.namaKategori!;
       _namaKamarController.text = widget.namaKamar!;

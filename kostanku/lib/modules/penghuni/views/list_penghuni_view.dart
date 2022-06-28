@@ -48,19 +48,19 @@ class _ListPenghuniViewState extends State<ListPenghuniView> {
           ),
         ),
         SizedBox(height: 40),
-        StreamBuilder<QuerySnapshot>(
-            stream: PenghuniDatabase.read(),
-            builder: (context, snapshot) {
-              if (snapshot.hasError) {
-                return Center(
-                  child: Text("Error"),
-                );
-              } else if (snapshot.hasData || snapshot.data != null) {
-                return Flexible(
-                  child: GridView.builder(
+        Flexible(
+          child: StreamBuilder<QuerySnapshot>(
+              stream: PenghuniDatabase.read(),
+              builder: (context, snapshot) {
+                if (snapshot.hasError) {
+                  return Center(
+                    child: Text("Error"),
+                  );
+                } else if (snapshot.hasData || snapshot.data != null) {
+                  return GridView.builder(
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
-                      childAspectRatio: 1 / 1.5,
+                      childAspectRatio: 1 / 1.35,
                       mainAxisSpacing: 16,
                       crossAxisSpacing: 16,
                     ),
@@ -68,78 +68,58 @@ class _ListPenghuniViewState extends State<ListPenghuniView> {
                     physics: BouncingScrollPhysics(),
                     itemBuilder: (context, index) {
                       var data = snapshot.data!.docs[index].data() as dynamic;
-                      // String idPenghuni = snapshot.data!.docs[index].id;
+                      String documentId = snapshot.data!.docs[index].id;
                       String namaKost = data["nama_kost"] ?? "";
+                      String namaKamar = data["nama_kamar"] ?? "";
                       String namaKategori = data["nama_kategori"] ?? "";
-                      // String namakamar = data["nama_kamar"] ?? "";
                       String namaPenghuni = data["nama_penghuni"] ?? "";
-                      // String kontak = data["kontak"] ?? "";
+                      String kontak = data["kontak"] ?? "";
                       String kontakDarurat = data["kontak_darurat"] ?? "";
-                      // String alamatAsal = data["alamat"] ?? "";
-                      // String pekerjaan = data["pekerjaan"] ?? "";
+                      String alamatAsal = data["alamat_asal"] ?? "";
+                      String pekerjaan = data["pekerjaan"] ?? "";
 
                       return PenghuniGridItem(
                         name: namaPenghuni,
                         kostName: namaKost,
                         kostCategory: namaKategori,
                         phoneNumber: kontakDarurat,
+                        documentId: documentId,
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            CupertinoPageRoute(
+                              builder: (context) {
+                                return AddPenghuniView(
+                                  isEdit: true,
+                                  documentId: documentId,
+                                  idPenghuni: documentId,
+                                  namaKost: namaKost,
+                                  namaKategori: namaKategori,
+                                  namaKamar: namaKamar,
+                                  namaPenghuni: namaPenghuni,
+                                  kontak: kontak,
+                                  kontakDarurat: kontakDarurat,
+                                  alamatAsal: alamatAsal,
+                                  pekerjaan: pekerjaan,
+                                );
+                              },
+                            ),
+                          );
+                        },
                       );
-                      // return PenghuniCard(
-                      //   idPenghuni: idPenghuni,
-                      //   namaKost: namaKost,
-                      //   namaKategori: namaKategori,
-                      //   namaKamar: namakamar,
-                      //   namaPenghuni: namaPenghuni,
-                      //   kontak: kontak,
-                      //   kontakDarurat: kontakDarurat,
-                      //   alamatAsal: alamatAsal,
-                      //   pekerjaan: pekerjaan,
-                      // );
                     },
                     itemCount: snapshot.data!.docs.length,
+                  );
+                }
+
+                return Center(
+                  child: SpinKitThreeBounce(
+                    color: Pallete.primary,
+                    size: 20,
                   ),
-                  //   child: ListView.separated(
-                  //     padding: EdgeInsets.fromLTRB(28, 0, 28, 20),
-                  //     physics: BouncingScrollPhysics(),
-                  //     itemBuilder: (context, index) {
-                  //       var data = snapshot.data!.docs[index].data() as dynamic;
-                  //       String idPenghuni = snapshot.data!.docs[index].id;
-                  //       String namaKost = data["nama_kost"] ?? "";
-                  //       String namaKategori = data["nama_kategori"] ?? "";
-                  //       String namakamar = data["nama_kamar"] ?? "";
-                  //       String namaPenghuni = data["nama_penghuni"] ?? "";
-                  //       String kontak = data["kontak"] ?? "";
-                  //       String kontakDarurat = data["kontak_darurat"] ?? "";
-                  //       String alamatAsal = data["alamat"] ?? "";
-                  //       String pekerjaan = data["pekerjaan"] ?? "";
-
-                  //       return PenghuniCard(
-                  //         idPenghuni: idPenghuni,
-                  //         namaKost: namaKost,
-                  //         namaKategori: namaKategori,
-                  //         namaKamar: namakamar,
-                  //         namaPenghuni: namaPenghuni,
-                  //         kontak: kontak,
-                  //         kontakDarurat: kontakDarurat,
-                  //         alamatAsal: alamatAsal,
-                  //         pekerjaan: pekerjaan,
-                  //       );
-                  //     },
-                  //     separatorBuilder: (context, index) {
-                  //       return SizedBox(height: 28);
-                  //     },
-                  //     itemCount: snapshot.data!.docs.length,
-                  //   ),
                 );
-              }
-
-              return Center(
-                child: SpinKitThreeBounce(
-                  color: Pallete.primary,
-                  size: 20,
-                ),
-              );
-            }),
+              }),
+        ),
       ],
     );
   }

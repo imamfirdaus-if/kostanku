@@ -62,15 +62,14 @@ class _HomeViewState extends State<HomeView> {
   Widget _buildBody() {
     return SafeArea(
       child: Container(
-        padding: EdgeInsets.only(top: 35),
+        padding: EdgeInsets.only(top: 24),
         child: Column(
-          // crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             _buildWelcomeSection(),
             SizedBox(height: 30),
             // _buildReport(),
             Carousel(
-              imageUrls: [],
+              imageUrls: imageUrls,
             ),
             SizedBox(height: 30),
             _buildBottomSection(),

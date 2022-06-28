@@ -17,6 +17,7 @@ class PenghuniDatabase {
   static String? id;
 
   static Future<void> create({
+    String? userId,
     String? namaKost,
     String? namaKategori,
     String? namaKamar,
@@ -27,6 +28,7 @@ class PenghuniDatabase {
     String? pekerjaan,
   }) async {
     Map<String, dynamic> data = {
+      "user_id": _user!.uid,
       "nama_kost": namaKost,
       "nama_kategori": namaKategori,
       "nama_kamar": namaKamar,

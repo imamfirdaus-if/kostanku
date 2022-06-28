@@ -45,6 +45,12 @@ class _HomeViewState extends State<HomeView> {
     'assets/svgs/kamar_kosong.svg',
   ];
 
+  List<String> imageUrls = [
+    'assets/images/slide1.png',
+    'assets/images/slide2.png',
+    'assets/images/slide3.png',
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -63,7 +69,9 @@ class _HomeViewState extends State<HomeView> {
             _buildWelcomeSection(),
             SizedBox(height: 30),
             // _buildReport(),
-            Carousel(),
+            Carousel(
+              imageUrls: [],
+            ),
             SizedBox(height: 30),
             _buildBottomSection(),
           ],

@@ -2,13 +2,14 @@
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:kostanku/modules/home/views/home_view.dart';
 
 class Carousel extends StatefulWidget {
-  // List<String> imageUrls;
+  List<String> imageUrls;
   int? index;
   Carousel({
     Key? key,
-    // required this.imageUrls,
+    required this.imageUrls,
     this.index,
   }) : super(key: key);
 
@@ -22,10 +23,10 @@ class _CarouselState extends State<Carousel> {
     return Column(
       children: [
         CarouselSlider.builder(
-          itemCount: 3,
+          itemCount: widget.imageUrls.length,
           itemBuilder: (context, index, pageViewIndex) {
             return Image.asset(
-              "assets/images/pict1.png",
+              widget.imageUrls[index],
               fit: BoxFit.cover,
             );
           },

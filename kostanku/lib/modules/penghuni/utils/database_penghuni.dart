@@ -46,7 +46,7 @@ class PenghuniDatabase {
   }
 
   static Stream<QuerySnapshot> read() {
-    return _collectionReference.snapshots();
+    return query.snapshots();
   }
 
   static Future<void> update({

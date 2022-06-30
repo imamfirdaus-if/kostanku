@@ -57,6 +57,17 @@ class _ListKategoriViewState extends State<ListKategoriView> {
                     child: Text("Error"),
                   );
                 } else if (snapshot.hasData || snapshot.data != null) {
+                  if (snapshot.data!.docs.isEmpty) {
+                    return Center(
+                      child: Text(
+                        "Tidak ada data",
+                        style: TextStyle(
+                          color: Pallete.disabled,
+                        ),
+                      ),
+                    );
+                  }
+
                   return ListView.separated(
                     padding: EdgeInsets.fromLTRB(28, 0, 28, 20),
                     physics: BouncingScrollPhysics(),

@@ -57,6 +57,17 @@ class _ListPenghuniViewState extends State<ListPenghuniView> {
                     child: Text("Error"),
                   );
                 } else if (snapshot.hasData || snapshot.data != null) {
+                  if (snapshot.data!.docs.isEmpty) {
+                    return Center(
+                      child: Text(
+                        "Tidak ada data",
+                        style: TextStyle(
+                          color: Pallete.disabled,
+                        ),
+                      ),
+                    );
+                  }
+
                   return GridView.builder(
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,

@@ -22,6 +22,7 @@ class KategoriDatabase {
     String? harga,
   }) async {
     Map<String, dynamic> data = {
+      "user_id": _user!.uid,
       "nama_kategori": namaKategori,
       "fasilitas": fasilitas,
       "harga": harga,
